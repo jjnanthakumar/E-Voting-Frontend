@@ -1,0 +1,59 @@
+.left>p:first-of-type {
+    background: #ffd987;
+    font-style: italic;
+    padding: 5px 10px;
+}
+
+button:focus {
+    outline: none !important;
+}
+
+.tip {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 10px;
+    font-size: 1.2em;
+    position: relative;
+    border-radius: 10px;
+}
+
+.tip:before {
+    position: absolute;
+    top: -14px;
+    left: 50px;
+    display: inline-block;
+    border-right: 14px solid transparent;
+    border-bottom: 14px solid #fff;
+    border-left: 14px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+}
+
+.tip:after {
+    position: absolute;
+    top: -12px;
+    left: 99px;
+    display: inline-block;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid #fff;
+    border-left: 12px solid transparent;
+    content: '';
+}
+
+.tip.left:before {
+    border-top: 14px solid transparent;
+    border-right: 14px solid #fff;
+    border-bottom: 14px solid transparent;
+    border-right-color: rgba(0, 0, 0, 0.2);
+    left: -28px;
+    top: 20px;
+}
+
+.tip.left:after {
+    border-top: 12px solid transparent;
+    border-right: 12px solid #fff;
+    border-bottom: 12px solid transparent;
+    left: -24px;
+    top: 22px;
+}

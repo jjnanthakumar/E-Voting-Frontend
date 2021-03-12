@@ -1,0 +1,17 @@
+###
+GET https://api.github.com/user
+Authorization: token 202c63342711bfde8eeed6dd01096fd46e5c5968
+
+###
+GET https://github.com/login/oauth/authorize?client_id=e9ca0af0655b63d7fb4c
+
+###
+POST https://github.com/login/oauth/access_token?client_id=e9ca0af0655b63d7fb4c&client_secret=07f856b48a7b2d2124d29ff432c9eef6e0452e93&code=93c02422130400802c69
+Accept: application/json
+
+###
+GET https://api.github.com/user/emails
+Authorization: token 0e6e591c86296138ad775221942815c3eead412a
+
+###
+GET https://api.twitter.com/labs/1/users?usernames=nanthakumarjj

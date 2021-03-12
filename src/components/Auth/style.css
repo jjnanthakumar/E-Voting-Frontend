@@ -1,0 +1,36 @@
+#fb:hover {
+    background-color: blue;
+    color: white
+}
+.ticker {
+    background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+    border-radius: 10px;
+}
+
+.customticker {
+    width: auto;
+    margin: 0;
+}
+
+#google:hover {
+    background-color: red;
+    color: white!important;
+}
+
+#github:hover {
+    background-color: black;
+    color: white!important;
+}
+#linkedin:hover{
+    background-color: blue;
+    color: white
+}
+.githublogin {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none !important;
+    padding: inherit;
+    background-color: white;
+}
