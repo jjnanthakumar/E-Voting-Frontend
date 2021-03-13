@@ -10,14 +10,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import ChatBot from 'react-simple-chatbot';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ScrollToTop from 'react-scroll-up';
-import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
-
-
-
-const initialState = { voterid: '', mobile: '', password: '', confirmpass: '' };
-const ErrorState = {mobile: { bool: false, text: '' }, password: { bool: false, text: '' }, confirmpass: { bool: false, text: '' }, voterid: { bool: false, text: '' } }
+const validData = [{ name: "Nanthakumar J J", district: "Madurai", mobile: "8695255075", id: 'ZBK2034635' }];
+const voterIds = validData.map((item) => (item.id))
+const initialState = { voterid: '', mobile: '', password: '', confirmpass: '', otp: '' };
+const ErrorState = { mobile: { bool: false, text: '' }, otp: { bool: false, text: '' }, password: { bool: false, text: '' }, confirmpass: { bool: false, text: '' }, voterid: { bool: false, text: '' } }
 
 function App() {
+  const [verified, setVerification] = useState(false);
   const [Sign, setSign] = useState(true);
   const [formData, setFormdata] = useState(initialState);
   const [errors, setErrors] = useState(ErrorState);
@@ -39,7 +38,6 @@ function App() {
       <Container maxWidth="lg">
         <Navbar Sign={Sign} setSign={setSign} switchMode={switchMode} log={log} setLog={setLog} />
         <Switch>
-          <Route exact path="/linkedin" component={LinkedInPopUp} />
           <Route path="/" exact>
             {!log && <ChatBot
               floating={true}
@@ -105,7 +103,7 @@ function App() {
             <Home log={log} setLog={setLog} />
 
           </Route>
-          <Route path="/auth" exact><Auth Sign={Sign} formData={formData} errors={errors} setLog={setLog} switchMode={switchMode} setErrors={setErrors} setFormdata={setFormdata} initialState={initialState} ErrorState={ErrorState} setSign={setSign} /></Route>
+          <Route path="/auth" exact><Auth voterIds={voterIds} verified={verified} setVerification={setVerification} Sign={Sign} formData={formData} errors={errors} setLog={setLog} switchMode={switchMode} setErrors={setErrors} setFormdata={setFormdata} initialState={initialState} ErrorState={ErrorState} setSign={setSign} /></Route>
         </Switch>
 
       </Container>

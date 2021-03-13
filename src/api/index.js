@@ -22,4 +22,5 @@ export const getUsers = () => API.get('/users');
 export const commentPost = (id, comment, user) => API.patch(`/posts/${id}/commentPost`, { comment: comment, user: user })
 export const deleteComment = (id, c_id) => API.patch(`/posts/${id}/deleteComment`, { c_id: c_id })
 export const uploadImage = () => API.get('/image-upload')
+export const sendOTP = (mobile)=> API.post('/users/otpsend', mobile)
 // export const getTwitterData = (oauth_token) => API.post('/auth/twitter', { oauth_token })
