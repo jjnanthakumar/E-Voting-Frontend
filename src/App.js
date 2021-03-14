@@ -10,8 +10,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import ChatBot from 'react-simple-chatbot';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ScrollToTop from 'react-scroll-up';
-const validData = [{ name: "Nanthakumar J J", district: "Madurai", mobile: "8695255075", id: 'ZBK2034635' }];
+const validData = [
+  { name: "Nanthakumar J J", district: "Madurai", mobile: "8695255075", id: 'ZBK2034635' },
+  { name: "Kalyan", district: "Chennai", mobile: "9490533901", id: "IAX2209419" }];
 const voterIds = validData.map((item) => (item.id))
+const numbers = validData.map((item) => (item.mobile))
 const initialState = { voterid: '', mobile: '', password: '', confirmpass: '', otp: '' };
 const ErrorState = { mobile: { bool: false, text: '' }, otp: { bool: false, text: '' }, password: { bool: false, text: '' }, confirmpass: { bool: false, text: '' }, voterid: { bool: false, text: '' } }
 
@@ -103,7 +106,7 @@ function App() {
             <Home log={log} setLog={setLog} />
 
           </Route>
-          <Route path="/auth" exact><Auth voterIds={voterIds} verified={verified} setVerification={setVerification} Sign={Sign} formData={formData} errors={errors} setLog={setLog} switchMode={switchMode} setErrors={setErrors} setFormdata={setFormdata} initialState={initialState} ErrorState={ErrorState} setSign={setSign} /></Route>
+          <Route path="/auth" exact><Auth validData={validData} voterIds={voterIds} verified={verified} setVerification={setVerification} Sign={Sign} formData={formData} errors={errors} setLog={setLog} switchMode={switchMode} setErrors={setErrors} setFormdata={setFormdata} initialState={initialState} ErrorState={ErrorState} setSign={setSign} /></Route>
         </Switch>
 
       </Container>

@@ -16,16 +16,20 @@ import emailjs from 'emailjs-com';
 import { sendOTP } from '../../api';
 var OTP;
 
-function Auth({ Sign, setSign, voterIds, setFormdata, formData, errors, setErrors, switchMode, setLog, verified, setVerification }) {
+function Auth({ Sign, setSign, validData, voterIds, setFormdata, formData, errors, setErrors, switchMode, setLog, verified, setVerification }) {
     const dispatch = useDispatch();
     const classes = useStyles();
     const [sent, setSent] = useState(false);
     const handleOTP = async (e) => {
-        alert(formData.mobile);
         e.preventDefault();
-        var res = await sendOTP({ mobile: formData.mobile });
-        console.log(res);
+        var { data } = await sendOTP({ mobile: formData.mobile });
+        OTP = data.otp;
         setSent(true);
+    }
+    const verifyOTP = async (e) => {
+        e.preventDefault();
+
+
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -76,6 +80,15 @@ function Auth({ Sign, setSign, voterIds, setFormdata, formData, errors, setError
                     setErrors({ ...errors, confirmpass: { bool: false, text: '' } })
                 }
                 break
+            case 'mobile':
+                var data = validData.filter((item) => item.mobile === e.target.value)[0]
+                if (data?.mobile !== e.target.value) {
+                    setErrors({ ...errors, mobile: { bool: true, text: 'Mobile Number not exists :(' } })
+                }
+                else if (data.mobile === e.target.value) {
+                    setErrors({ ...errors, mobile: { bool: false, text: '' } })
+                }
+                break;
             case 'voterid':
                 let voterid = e.target.value
                 if (!voterIds.includes(voterid)) {
@@ -107,7 +120,7 @@ function Auth({ Sign, setSign, voterIds, setFormdata, formData, errors, setError
                 <Typography variant="h5">{Sign ? 'Sign Up' : 'Sign In'}</Typography>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
-                        <Input sent={sent} data={formData.mobile} setSent={setSent} helperText={errors.mobile.text} error={errors.mobile.bool} value={formData.mobile} name="mobile" label="Mobile Number" handleChange={handleChange} sendOTP={handleOTP} />
+                        <Input sent={sent} data={formData.mobile} Sign={Sign} setSent={setSent} helperText={errors.mobile.text} error={errors.mobile.bool} value={formData.mobile} name="mobile" label="Mobile Number" handleChange={handleChange} sendOTP={handleOTP} />
                         {sent && (
                             <form method="post" style={{ paddingLeft: '10px' }}>
                                 <Input helperText={errors.otp.text} error={errors.otp.bool} value={formData.otp} handleChange={handleChange} label="Enter OTP here" variant="" />
