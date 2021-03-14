@@ -22,9 +22,9 @@ function Home({ log, setLog }) {
                     <Grid item xs={12} sm={7}>
                         <Posts setCurrentId={setCurrentId} log={log} setLog={setLog} />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    {/* <Grid item xs={12} sm={4}>
                         <Form currentId={currentId} setCurrentId={setCurrentId} log={log} />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Container>
         </Grow>

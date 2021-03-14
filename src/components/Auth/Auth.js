@@ -1,5 +1,5 @@
 import useStyles from './style';
-// import axios from 'axios';
+
 import { Paper, Grid, Avatar, Button, Typography, Container } from '@material-ui/core';
 import React from 'react';
 import LockOutline from '@material-ui/icons/LockOutlined';
@@ -14,21 +14,31 @@ import emailjs from 'emailjs-com';
 // import ActionAlerts from '../AlertMessage';
 // import CustomTicker from './customTicker';
 import { sendOTP } from '../../api';
-var OTP;
+import { toast } from 'react-toastify';
 
 function Auth({ Sign, setSign, validData, voterIds, setFormdata, formData, errors, setErrors, switchMode, setLog, verified, setVerification }) {
     const dispatch = useDispatch();
     const classes = useStyles();
     const [sent, setSent] = useState(false);
+    const [stateOTP, setOTP] = useState("");
     const handleOTP = async (e) => {
         e.preventDefault();
         var { data } = await sendOTP({ mobile: formData.mobile });
-        OTP = data.otp;
+        setOTP(data.otp);
         setSent(true);
     }
-    const verifyOTP = async (e) => {
+    const verify = (e) => {
         e.preventDefault();
-
+        let otp = formData.otp
+        if (otp === stateOTP) {
+            setVerification(true)
+            toast.success("Mobile verified successfully :)")
+            setSent(false);
+        }
+        else {
+            setVerification(false)
+        }
+        setOTP("");
 
     }
     const handleSubmit = (e) => {
@@ -120,12 +130,12 @@ function Auth({ Sign, setSign, validData, voterIds, setFormdata, formData, error
                 <Typography variant="h5">{Sign ? 'Sign Up' : 'Sign In'}</Typography>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
-                        <Input sent={sent} data={formData.mobile} Sign={Sign} setSent={setSent} helperText={errors.mobile.text} error={errors.mobile.bool} value={formData.mobile} name="mobile" label="Mobile Number" handleChange={handleChange} sendOTP={handleOTP} />
+                        <Input verified={verified} sent={sent} data={formData.mobile} Sign={Sign} setSent={setSent} helperText={errors.mobile.text} error={errors.mobile.bool} value={formData.mobile} name="mobile" label="Mobile Number" handleChange={handleChange} sendOTP={handleOTP} />
                         {sent && (
-                            <form method="post" style={{ paddingLeft: '10px' }}>
-                                <Input helperText={errors.otp.text} error={errors.otp.bool} value={formData.otp} handleChange={handleChange} label="Enter OTP here" variant="" />
-                                <Button size="small" color="primary"><small>Verify OTP</small></Button>
-                            </form>
+                            <>
+                                <Input name="otp" helperText={errors.otp.text} error={errors.otp.bool} value={formData.otp} handleChange={handleChange} label="Enter OTP here" />
+                                <Button onClick={verify} size="small" color="primary"><small>&nbsp; Verify OTP</small></Button>
+                            </>
                         )}
                         <Input helperText={errors.voterid.text} error={errors.voterid.bool} value={formData.voterid} name="voterid" label="Voter Id" handleChange={handleChange} />
                         <Input helperText={errors.password.text} id="pass" error={errors.password.bool} value={formData.password} name="password" type={showPass ? "text" : "password"} handleShowpassword={handleShowpassword} label="Password" handleChange={handleChange} />
@@ -134,7 +144,7 @@ function Auth({ Sign, setSign, validData, voterIds, setFormdata, formData, error
                             <Input helperText={errors.confirmpass.text} error={errors.confirmpass.bool} value={formData.confirmpass} name="confirmpass" label="Confirm Password" type={showPass ? "text" : "password"} handleShowpassword={handleShowpassword} handleChange={handleChange} />
                         )}
                     </Grid>
-                    <Button type="submit" className={classes.submit} fullWidth variant="contained" color="primary">
+                    <Button type="submit" disabled={!Sign ? !verified : false} className={classes.submit} fullWidth variant="contained" color="primary">
                         {Sign ? 'Sign Up' : 'Sign In'}
                     </Button>
 
