@@ -1,6 +1,6 @@
 import axios from 'axios';
-// const API = axios.create({ baseURL: "https://mempro.herokuapp.com" });
-const API = axios.create({ baseURL: "http://localhost:5000" })
+const API = axios.create({ baseURL: "https://evotingback.herokuapp.com/" });
+// const API = axios.create({ baseURL: "http://localhost:5000" })
 
 API.interceptors.request.use((req) => {
     const data = JSON.parse(localStorage.getItem('profile'))
