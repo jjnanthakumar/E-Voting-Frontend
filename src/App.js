@@ -4,15 +4,14 @@ import Navbar from './components/Navbar/Navbar';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
+import voters from './voters.json';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ChatBot from 'react-simple-chatbot';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ScrollToTop from 'react-scroll-up';
-const validData = [
-  { name: "Nanthakumar J J", district: "Madurai", mobile: "8695255075", id: 'ZBK2034635' },
-  { name: "Kalyan", district: "Chennai", mobile: "9490533901", id: "IAX2209419" }];
+const validData = voters;
 const voterIds = validData.map((item) => (item.id))
 const numbers = validData.map((item) => (item.mobile))
 const initialState = { voterid: '', mobile: '', password: '', confirmpass: '', otp: '' };
