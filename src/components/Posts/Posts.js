@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import { Grid, CircularProgress } from '@material-ui/core';
 import Post from "./Post/Post";
 // import useStyles from './styles';
+import partys from '../../partys.json';
 
 const Posts = ({ setCurrentId, log, setLog }) => {
     // const classes = useStyles();
-    const posts = useSelector((state) => state.posts);
+    const posts=partys;
     return (
         !posts.length ? <CircularProgress /> : (
             <Grid container alignItems="stretch" spacing={3}>

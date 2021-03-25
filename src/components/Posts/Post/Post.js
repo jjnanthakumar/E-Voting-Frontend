@@ -15,7 +15,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import $ from 'jquery';
 import CustomizedMenus from '../../Menu';
-
+import axios from 'axios';
 const topFunc = () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -92,9 +92,19 @@ const Post = ({ post, setCurrentId, log, setLog }) => {
             setComments(temp)
         }
     }
+    const getBase64 = (url) => {
+        var img;
+        axios.get(url, { responseType: 'arraybuffer' }).then(
+            (res) => {
+                window.img = Buffer.from(res.data).toString('base64');
+            })
+        console.log(window.img)
+        return window.img;
+    }
+    console.log(getBase64(post.profile))
     return (
         <Card className={classes.card}>
-            <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
+            <CardMedia className={classes.media} image={getBase64(post.profile)} title={post.title} />
             <div className={classes.overlay}>
                 <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">{moment(post.date).fromNow()}</Typography>
@@ -117,7 +127,7 @@ const Post = ({ post, setCurrentId, log, setLog }) => {
 
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator || user?.result?.userID === post?.creator || user?.id === post?.creator || String(user?.result?.id) === post?.creator) && (<Button size="small" style={{ color: 'red' }} onClick={() => { dispatch(deletePost(post._id)) }}><DeleteIcon fontSize="small" /></Button>)}
             </CardActions>
-            <Button disabled={log} className={classes.comment} id="comment_but" onClick={handleClick} size="small" variant="contained" color="primary"><Chat />&nbsp;{comments.length < 2 ? comments.length + ' Comment' : comments.length + ' Comments'}</Button>
+            {/* <Button disabled={log} className={classes.comment} id="comment_but" onClick={handleClick} size="small" variant="contained" color="primary"><Chat />&nbsp;{comments.length < 2 ? comments.length + ' Comment' : comments.length + ' Comments'}</Button> */}
             <div id={`toggle${post._id}`} style={{ display: !user?.result ? 'none' : 'block' }}>
                 <form onSubmit={handleComments}>
                     <CardContent>
