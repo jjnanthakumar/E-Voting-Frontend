@@ -3,7 +3,7 @@ import Form from "../Forms/Form";
 import Posts from "../Posts/Posts";
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getPosts } from '../../actions/posts';
+import { getPartys } from '../../actions/partys';
 import useStyles from '../../style';
 
 function Home({ log, setLog }) {
@@ -11,7 +11,7 @@ function Home({ log, setLog }) {
     const dispatch = useDispatch();
     const [currentId, setCurrentId] = useState(0);
     useEffect(() => {
-        dispatch(getPosts());
+        dispatch(getPartys());
         // if (currentId !== 0) { dispatch(getusers()); }
     }, [dispatch, currentId])
     return (

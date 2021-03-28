@@ -1,18 +1,18 @@
 import { useSelector } from "react-redux";
 import { Grid, CircularProgress } from '@material-ui/core';
 import Post from "./Post/Post";
-// import useStyles from './styles';
-import partys from '../../partys.json';
+import useStyles from './styles';
 
 const Posts = ({ setCurrentId, log, setLog }) => {
-    // const classes = useStyles();
-    const posts=partys;
+    const classes = useStyles();
+    const partys=useSelector((state) => state.partys);;
+    const user = JSON.parse(localStorage.getItem('profile'))
     return (
-        !posts.length ? <CircularProgress /> : (
+        !partys.length || !user ? <CircularProgress /> : (
             <Grid container alignItems="stretch" spacing={3}>
-                {posts.map((post) => (
-                    <Grid key={post.id} item xs={12} sm={6}>
-                        <Post post={post} setCurrentId={setCurrentId} log={log} setLog={setLog} />
+                {partys.map((party) => (
+                    <Grid key={party.id} item xs={12} sm={6}>
+                        <Post party={party} setCurrentId={setCurrentId} log={log} setLog={setLog} />
                     </Grid>
 
                 ))}

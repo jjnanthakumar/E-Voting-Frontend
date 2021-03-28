@@ -7,7 +7,7 @@ import { useEffect, useState, useRef } from 'react';
 import FileBase from 'react-file-base64';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost, updatePost } from '../../actions/posts';
+import { createParty, updateParty } from '../../actions/partys';
 
 const Form = ({ setCurrentId, currentId, log }) => {
     const autoC = useRef(null);
@@ -26,9 +26,9 @@ const Form = ({ setCurrentId, currentId, log }) => {
         e.preventDefault();
         console.log(postData)
         if (currentId === 0) {
-            dispatch(createPost({ ...postData, name: user?.result?.name }));
+            dispatch(createParty({ ...postData, name: user?.result?.name }));
         } else {
-            dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+            dispatch(updateParty(currentId, { ...postData, name: user?.result?.name }));
         }
         clear();
     };

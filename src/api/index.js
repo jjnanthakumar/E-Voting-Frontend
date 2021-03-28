@@ -11,16 +11,16 @@ API.interceptors.request.use((req) => {
     }
     return req;
 })
-export const fetchPosts = () => API.get('/posts');
-export const createPost = (newPost) => API.post('/posts', newPost);
-export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);
-export const deltePost = (id) => API.delete(`/posts/${id}`);
-export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
+export const fetchPartys = () => API.get('/partys');
+export const createParty = (newParty) => API.post('/partys', newParty);
+export const updateParty = (id, party) => API.patch(`/partys/${id}`, party);
+// export const deltePost = (id) => API.delete(`/posts/${id}`);
+export const voteParty = (id) => API.patch(`/partys/${id}/vote`);
 export const signUp = (formData) => API.post(`/users/signup`, formData);
 export const signIn = (formData) => API.post(`/users/signin`, formData);
 export const getUsers = () => API.get('/users');
-export const commentPost = (id, comment, user) => API.patch(`/posts/${id}/commentPost`, { comment: comment, user: user })
-export const deleteComment = (id, c_id) => API.patch(`/posts/${id}/deleteComment`, { c_id: c_id })
-export const uploadImage = () => API.get('/image-upload')
+// export const commentPost = (id, comment, user) => API.patch(`/posts/${id}/commentPost`, { comment: comment, user: user })
+// export const deleteComment = (id, c_id) => API.patch(`/posts/${id}/deleteComment`, { c_id: c_id })
+// export const uploadImage = () => API.get('/image-upload')
 export const sendOTP = (mobile) => API.post('/users/otpsend', mobile)
 export const verifyOTP = (otp, actualotp) => API.post('/users/otpverify', { otp, actualotp })
