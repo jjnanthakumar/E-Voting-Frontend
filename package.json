@@ -18,7 +18,7 @@
     "image-to-base64": "^2.1.1",
     "jquery": "^3.5.1",
     "jwt-decode": "^3.1.2",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "msal": "^1.4.5",
     "notistack": "^1.0.3",
     "react": "^17.0.1",
